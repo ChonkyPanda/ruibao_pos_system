@@ -1,4 +1,6 @@
+# Ignore the database file
 /database.db
 
 # Environment secrets
 .env
+
