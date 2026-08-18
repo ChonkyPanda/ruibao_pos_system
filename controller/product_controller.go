@@ -55,6 +55,11 @@ func CreateProduct(c *gin.Context) {
 		Category string  `json:"category" binding:"required"`
 	}
 
+	if err := c.ShouldBindJSON(&input); err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        return
+    }
+
 	product, err := service.CreateProduct(input.Name, input.Barcode, input.Price, input.Stock, input.Category)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
@@ -73,13 +78,17 @@ func UpdateProduct(c *gin.Context) {
 	}
 
 	var input struct {
-		ID       uint    `json:"id" binding:"required"`
 		Name     string  `json:"name"`
 		Barcode  string  `json:"barcode"`
 		Price    float64 `json:"price"`
 		Stock    int     `json:"stock"`
 		Category string  `json:"category"`
 	}
+
+	if err := c.ShouldBindJSON(&input); err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        return
+    }
 
 	product := &models.Product{
 		ID:       uint(parsedID),

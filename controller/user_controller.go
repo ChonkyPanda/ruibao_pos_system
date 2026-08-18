@@ -53,6 +53,11 @@ func CreateUser(c *gin.Context) {
 		Password string `json:"password" binding:"required"`
 		Admin    bool   `json:"admin"`
 	}
+	
+	if err := c.ShouldBindJSON(&input); err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        return
+    }
 
 	user, err := service.CreateUser(input.Username, input.Password, input.Admin)
 	if err != nil {
@@ -75,6 +80,11 @@ func UpdateUser(c *gin.Context) {
 		Password string `json:"password"`
 		Admin    bool   `json:"admin"`
 	}
+
+	if err := c.ShouldBindJSON(&input); err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        return
+    }
 
 	hashedPassword, err := utils.HashPassword(input.Password)
 	if err != nil {
