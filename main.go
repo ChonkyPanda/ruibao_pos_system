@@ -26,6 +26,15 @@ func main() {
 		userRoutes.DELETE("/:id", controller.DeleteUser)
 	}
 
+	productRoutes := r.Group("/products")
+	{
+		productRoutes.GET("", controller.GetAllProducts)
+		productRoutes.GET("/:id", controller.GetProductByID)
+		productRoutes.POST("", controller.CreateProduct)
+		productRoutes.PUT("/:id", controller.UpdateProduct)
+		productRoutes.DELETE("/:id", controller.DeleteProduct)
+	}
+
 	r.Run(":8080")
 	// service.CreateUser("Admin", "Jasonxie175", true)
 

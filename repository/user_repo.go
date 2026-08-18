@@ -33,9 +33,9 @@ func GetUserByID(id uint) (*models.User, error) {
 	return Query[models.User](database.DB.First(&models.User{}, id))
 }
 
-func CreateUser(name, password string, admin bool) (*models.User, error) {
+func CreateUser(username, password string, admin bool) (*models.User, error) {
 	u := &models.User{
-		Username:     name,
+		Username: username,
 		Password: password,
 		Admin:  admin,
 	}

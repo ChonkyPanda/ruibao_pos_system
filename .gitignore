@@ -2,5 +2,5 @@
 /database.db
 
 # Environment secrets
-.env
+*.env
 
