@@ -1,7 +1,6 @@
 package repository
 
 import (
-
 	"ruibao_pos_system/database"
 	
 	"ruibao_pos_system/models"
